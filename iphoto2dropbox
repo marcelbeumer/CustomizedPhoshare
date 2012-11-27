@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Type event name (regex):";
+read events;
+
+if [ x"$events" = x ]
+then
+    No events regex provided, exiting.
+    exit;
+fi
+
+/Applications/Phoshare.app/Contents/MacOS/Phoshare --export "/Users/marcel/Dropbox/Apps/Flickr" --iphoto "/Users/Shared/We/Pictures/Our iPhoto Library.photolibrary" --events "$events" --foldertemplate "{name}" --nametemplate "{index}" --captiontemplate "{description}" --iptcall
+
+exiftool '-filename<CreateDate' -d %y%m%d_%H%M%S%%-c.%%le -r /Users/marcel/Dropbox/Apps/Flickr
+
